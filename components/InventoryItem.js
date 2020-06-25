@@ -2,6 +2,7 @@ import * as React from "react";
 import { View, Image, Text, TouchableOpacity } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
 import { useNavigation } from "@react-navigation/native";
+import { FullWidthButton } from "./FullWidthButton";
 
 // Props:
 // imageLink - link (uri) to image
@@ -9,16 +10,18 @@ import { useNavigation } from "@react-navigation/native";
 export default function InventoryItem(props) {
   const { navigate, push } = useNavigation();
 
-  return (
-    <TouchableOpacity style={styles.itemContainer} onPress={() => push("ItemInfo", { test: "hi", itemName: props.itemName})}>
+  const itemContents = (
+    <View style={{flexDirection: "row"}}>
       <Image source={{ uri: props.imageLink }} style={styles.itemImage} />
       <View style={styles.infoContainer}>
-        <Text>Here's {useProperArticle(props.itemName)}!</Text>
-        <Text>Here's some "information"</Text>
+        <Text>Here's {useProperArticle(props.itemName)}</Text>
+        <Text>Here's some "information."</Text>
       </View>
-      <Ionicons name="md-arrow-dropright" size={30} style={{marginRight: 10}}/>
-    </TouchableOpacity>
-  )
+    </View>
+  );
+  return (
+    <FullWidthButton contents={itemContents} useArrow={true} onPress={() => push("ItemInfo", { test: "hi", itemName: props.itemName })} />
+  );
 }
 
 function useProperArticle(itemName) {
@@ -26,13 +29,8 @@ function useProperArticle(itemName) {
 }
 
 const styles = {
-  itemContainer: {
+  contentContainer: {
     flexDirection: "row",
-    backgroundColor: "white",
-    borderTopWidth: 2,
-    borderBottomWidth: 2,
-    marginBottom: -2,
-    alignItems: "center",
   },
   itemImage: {
      flex: 2,
