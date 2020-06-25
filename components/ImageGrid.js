@@ -44,10 +44,16 @@ function gridReducer({ grid, currentRow, maxWidth }, cell) {
   };
 }
 
+function fillLastRow({ grid, currentRow, maxWidth }, placeholder) {
+  while (grid[currentRow].length <= maxWidth) {
+    grid[currentRow].push(placeholder);
+  }
+}
+
 function gridRowToJSX(row, imgStyle) {
   return (
     <View style={styles.gridRow} key={key++}>
-      {row.map(itemLink => <Image key={key++} style={imgStyle} source={{uri: itemLink}} />)}
+      {row.map(itemLink => <Image key={key++} style={styles.gridImg} source={{uri: itemLink}} />)}
     </View>
   );
 }
@@ -78,7 +84,8 @@ const styles = {
   gridImg: {
     width: Layout.window.width / 3 - 10,
     height: Layout.window.width / 3 - 10,
-    //marginHorizontal: Layout.window.width / 10,
-    //marginVertical: Layout.window.width / 20
+    borderColor: "gray",
+    borderWidth: 3,
+    borderRadius: 3,
   },
 };
