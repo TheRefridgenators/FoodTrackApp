@@ -1,7 +1,7 @@
 {
   "expo": {
-    "name": "refridgenatorsApp",
-    "slug": "refridgenatorsApp",
+    "name": "FoodTrackApp",
+    "slug": "FoodTrackApp",
     "platforms": [
       "ios",
       "android",
