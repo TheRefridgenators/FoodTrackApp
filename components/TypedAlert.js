@@ -3,6 +3,7 @@ import { Image, Text, TouchableOpacity, View } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
 
 import { FullWidthButton } from "../components/FullWidthButton";
+import Colors from "../constants/Colors";
 
 /**
  * An alert that serves to either notify the user of something or ask something
@@ -18,8 +19,10 @@ import { FullWidthButton } from "../components/FullWidthButton";
 export function TypedAlert(props) {
   return (
     <View style={styles.alertContainer}>
-      {props.imageLink && <Image source={{ uri: props.imageLink }} style={styles.alertImage} />}
-      <Text style={{flex: 4, textAlign: "center"}}>{props.summary}</Text>
+      {props.imageLink && (
+        <Image source={{ uri: props.imageLink }} style={styles.alertImage} />
+      )}
+      <Text style={{ flex: 4, textAlign: "center" }}>{props.summary}</Text>
       {props.purpose === "ask" && feedbackBoxes(null, null)}
     </View>
   );
@@ -28,10 +31,10 @@ export function TypedAlert(props) {
 function feedbackBoxes(onYes, onNo) {
   return (
     <View style={styles.feedbackContainer}>
-      <TouchableOpacity>
+      <TouchableOpacity style={{ marginHorizontal: 5 }}>
         <Ionicons name="md-checkmark" size={30} />
       </TouchableOpacity>
-      <TouchableOpacity>
+      <TouchableOpacity style={{ marginHorizontal: 5 }}>
         <Ionicons name="md-close" size={30} />
       </TouchableOpacity>
     </View>
@@ -52,10 +55,12 @@ const styles = {
   feedbackContainer: {
     flex: 1,
     flexDirection: "row",
-    borderColor: "gray",
+    backgroundColor: "#ccc",
     borderWidth: 2,
     justifyContent: "center",
     borderRadius: 10,
+    marginHorizontal: 10,
+    paddingHorizontal: 5,
   },
   alertImage: {
     flex: 2,

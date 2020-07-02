@@ -16,7 +16,7 @@ export default function InventoryItem(props) {
   const { navigate } = useNavigation();
 
   const itemContents = (
-    <View style={{flexDirection: "row"}}>
+    <View style={{ flexDirection: "row" }}>
       <Image source={{ uri: props.imageLink }} style={styles.itemImage} />
       <View style={styles.infoContainer}>
         <Text>Here's {useProperArticle(props.itemName)}!</Text>
@@ -26,7 +26,13 @@ export default function InventoryItem(props) {
   );
 
   return (
-    <FullWidthButton contents={itemContents} useArrow={true} onPress={() => navigate("ItemInfo", { test: "hi", itemName: props.itemName })} />
+    <FullWidthButton
+      contents={itemContents}
+      useArrow={true}
+      onPress={() =>
+        navigate("ItemInfo", { test: "hi", itemName: props.itemName })
+      }
+    />
   );
 }
 
@@ -39,9 +45,9 @@ const styles = {
     flexDirection: "row",
   },
   itemImage: {
-     flex: 2,
-     height: 100,
-     resizeMode: "contain",
+    flex: 2,
+    height: 100,
+    resizeMode: "contain",
   },
   infoContainer: {
     flex: 3,

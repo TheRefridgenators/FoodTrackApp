@@ -1,14 +1,14 @@
 import * as React from "react";
 import { Image, View, StyleSheet, ScrollView } from "react-native";
 
-import Layout from "../constants/Layout"
+import Layout from "../constants/Layout";
 
 // TODO: Rename this to better reflect its purpose
 const gridDataTemplate = {
   grid: [[]],
   currentRow: 0,
   maxWidth: 0,
-}
+};
 
 let key = 0;
 
@@ -24,7 +24,7 @@ export default function ImageGrid(props) {
 
   return (
     <ScrollView style={styles.gridContainer}>
-      {filledGrid.grid.map(row => gridRowToJSX(row, imageDimensions))}
+      {filledGrid.grid.map((row) => gridRowToJSX(row, imageDimensions))}
     </ScrollView>
   );
 }
@@ -53,16 +53,18 @@ function fillLastRow({ grid, currentRow, maxWidth }, placeholder) {
 function gridRowToJSX(row, imgStyle) {
   return (
     <View style={styles.gridRow} key={key++}>
-      {row.map(itemLink => <Image key={key++} style={styles.gridImg} source={{uri: itemLink}} />)}
+      {row.map((itemLink) => (
+        <Image key={key++} style={styles.gridImg} source={{ uri: itemLink }} />
+      ))}
     </View>
   );
 }
 
 function calcImageDimensions(maxWidth) {
-  const length = Layout.window.width / maxWidth - 10
+  const length = Layout.window.width / maxWidth - 10;
   return {
     width: length,
-    height: length
+    height: length,
   };
 }
 

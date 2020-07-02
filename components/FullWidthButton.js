@@ -11,12 +11,16 @@ import { Ionicons } from "@expo/vector-icons";
 export function FullWidthButton(props) {
   return (
     <TouchableOpacity style={styles.buttonContainer} onPress={props.onPress}>
-      <View style={styles.contentContainer}>
-        {props.contents}
-      </View>
-      {props.useArrow && <Ionicons name="md-arrow-dropright" size={30} style={styles.arrowIcon} />}
+      <View style={styles.contentContainer}>{props.contents}</View>
+      {props.useArrow && (
+        <Ionicons
+          name="md-arrow-dropright"
+          size={30}
+          style={styles.arrowIcon}
+        />
+      )}
     </TouchableOpacity>
-  )
+  );
 }
 
 const styles = {

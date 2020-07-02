@@ -9,14 +9,16 @@ export function AlertsScreen(props) {
   return (
     <View style={styles.screenContainer}>
       <Text>This is the alerts screen.</Text>
-      <TypedAlert purpose="ask" summary="Test"/>
+      <TypedAlert
+        purpose="ask"
+        summary="Is this an apple?"
+        imageLink="http://192.168.1.55:3000/images/Apple.jpg"
+      />
       <View></View>
     </View>
-  )
+  );
 }
 
 const styles = {
-  screenContainer: {
-
-  }
+  screenContainer: {},
 };

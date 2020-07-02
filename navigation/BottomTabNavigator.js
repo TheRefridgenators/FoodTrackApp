@@ -3,7 +3,7 @@ import * as React from "react";
 
 import TabBarIcon from "../components/TabBarIcon";
 
-import ImageScreen from "../screens/ImageScreen";
+import { SnapshotsScreen } from "../screens/SnapshotsScreen";
 import InventoryScreen from "../screens/InventoryScreen";
 import { AlertsScreen } from "../screens/AlertsScreen";
 
@@ -19,11 +19,13 @@ export default function BottomTabNavigator({ navigation, route }) {
   return (
     <BottomTab.Navigator initialRouteName={INITIAL_ROUTE_NAME}>
       <BottomTab.Screen
-        name="Image"
-        component={ImageScreen}
+        name="Snapshots"
+        component={SnapshotsScreen}
         options={{
           title: "Snapshots",
-          tabBarIcon: ({ focused }) => <TabBarIcon focused={focused} name="md-images" /> // TODO: This could also be a camera
+          tabBarIcon: ({ focused }) => (
+            <TabBarIcon focused={focused} name="md-images" />
+          ), // TODO: This could also be a camera
         }}
       />
       <BottomTab.Screen
@@ -31,7 +33,9 @@ export default function BottomTabNavigator({ navigation, route }) {
         component={InventoryScreen}
         options={{
           title: "Inventory",
-          tabBarIcon: ({ focused }) => <TabBarIcon focused={focused} name="md-list-box" />
+          tabBarIcon: ({ focused }) => (
+            <TabBarIcon focused={focused} name="md-list-box" />
+          ),
         }}
       />
       <BottomTab.Screen
@@ -39,7 +43,9 @@ export default function BottomTabNavigator({ navigation, route }) {
         component={AlertsScreen}
         options={{
           title: "Alerts",
-          tabBarIcon: ({ focused }) => <TabBarIcon focused={focused}name="md-journal" />
+          tabBarIcon: ({ focused }) => (
+            <TabBarIcon focused={focused} name="md-journal" />
+          ),
         }}
       />
     </BottomTab.Navigator>
@@ -47,7 +53,8 @@ export default function BottomTabNavigator({ navigation, route }) {
 }
 
 function getHeaderTitle(route) {
-  const routeName = route.state?.routes[route.state.index]?.name ?? INITIAL_ROUTE_NAME;
+  const routeName =
+    route.state?.routes[route.state.index]?.name ?? INITIAL_ROUTE_NAME;
 
   switch (routeName) {
     case "Image":
