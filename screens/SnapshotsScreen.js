@@ -10,7 +10,12 @@ export function SnapshotsScreen() {
         Here are some apples for your troubles:
       </Text>
       <ImageGrid
-        images={Array(5).fill("http://192.168.1.55:3000/images/Apple.jpg")}
+        images={Array(5).fill([
+          "http://192.168.1.55:3000/images/Apple.jpg",
+          {
+            apple: true,
+          },
+        ])}
         maxWidth={3}
       />
     </View>

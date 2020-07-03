@@ -1,7 +1,8 @@
 import * as React from "react";
-import { Image, View, StyleSheet, ScrollView } from "react-native";
+import { Image, View, ScrollView } from "react-native";
 
 import Layout from "../constants/Layout";
+import { TouchableImageWithMetadata } from "./ImageWithMetadata";
 
 // TODO: Rename this to better reflect its purpose
 const gridDataTemplate = {
@@ -13,7 +14,7 @@ const gridDataTemplate = {
 let key = 0;
 
 // Props taken:
-// images - array of image paths/links
+// images - array of image paths/links and their associated data
 // maxWidth - number of images per row
 export default function ImageGrid(props) {
   let gridData = deepObjClone(gridDataTemplate);
@@ -53,8 +54,13 @@ function fillLastRow({ grid, currentRow, maxWidth }, placeholder) {
 function gridRowToJSX(row, imgStyle) {
   return (
     <View style={styles.gridRow} key={key++}>
-      {row.map((itemLink) => (
-        <Image key={key++} style={styles.gridImg} source={{ uri: itemLink }} />
+      {row.map(([itemLink, metadata]) => (
+        <TouchableImageWithMetadata
+          key={key++}
+          metadata={metadata}
+          imageStyle={styles.gridImg}
+          imageLink={itemLink}
+        />
       ))}
     </View>
   );

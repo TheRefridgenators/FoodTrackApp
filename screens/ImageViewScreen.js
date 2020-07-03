@@ -1,5 +1,5 @@
 import * as React from "react";
-import { Image } from "react-native";
+import { Image, View, Text } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 
 import Layout from "../constants/Layout";
@@ -10,7 +10,7 @@ import Layout from "../constants/Layout";
  * @param {*} props Properties related to screen rendering.
  */
 export function ImageViewScreen(props) {
-  const { imageLink, displayData } = props.route.params;
+  const { imageLink, metadata } = props.route.params;
 
   return (
     <View style={styles.screenContainer}>
@@ -18,9 +18,21 @@ export function ImageViewScreen(props) {
         <Image source={{ uri: imageLink }} style={styles.imageStyle} />
       )}
       <View style={styles.displayDataContainer}>
-        <Text>{displayData}</Text>
+        <Text>Here's your data: </Text>
+        {Object.entries(metadata).map(stringifyMetadata)}
       </View>
     </View>
+  );
+}
+
+let id = 0;
+
+function stringifyMetadata([key, value]) {
+  return (
+    <Text key={id++}>
+      <Text style={{ fontWeight: "bold" }}>{key.toString()}: </Text>
+      {value.toString()}
+    </Text>
   );
 }
 
