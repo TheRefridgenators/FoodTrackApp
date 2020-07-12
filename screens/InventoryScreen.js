@@ -5,7 +5,7 @@ import { ItemInfo } from "./ItemInfoScreen";
 
 export default function InventoryScreen(props) {
   return (
-    <View>
+    <ScrollView>
       <InventoryItem
         imageLink="http://192.168.1.55:3000/images/Apple.jpg"
         itemName="Apple"
@@ -15,7 +15,7 @@ export default function InventoryScreen(props) {
         imageLink="http://192.168.1.55:3000/images/Banana.jpg"
         fullButton={true}
       />
-    </View>
+    </ScrollView>
   );
 }
 

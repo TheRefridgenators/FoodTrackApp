@@ -1,7 +1,9 @@
 import * as React from "react";
 import { View, Image, Text, TouchableOpacity } from "react-native";
 import { useNavigation } from "@react-navigation/native";
+
 import { FullWidthButton } from "./FullWidthButton";
+import { useProperArticle } from "../utilities/Inventory";
 
 // Props:
 // imageLink - link (uri) to image
@@ -26,27 +28,24 @@ export default function InventoryItem(props) {
   );
 
   return (
-    <FullWidthButton
-      contents={itemContents}
-      useArrow={true}
-      onPress={() =>
-        navigate("ItemInfo", {
-          test: "hi",
-          itemName: props.itemName,
-          imageLink: props.imageLink,
-        })
-      }
-    />
+    <View style={styles.contentContainer}>
+      <Image source={{ uri: props.imageLink }} style={styles.itemImage} />
+      <View style={styles.infoContainer}>
+        <Text>Here's {useProperArticle(props.itemName)}!</Text>
+        <Text>Here's some "information."</Text>
+      </View>
+    </View>
   );
-}
-
-function useProperArticle(itemName) {
-  return (itemName.match(/^[aeiou]/i) ? "an " : "a ") + itemName;
 }
 
 const styles = {
   contentContainer: {
     flexDirection: "row",
+    backgroundColor: "white",
+    borderColor: "black",
+    borderTopWidth: 2,
+    borderBottomWidth: 2,
+    marginBottom: -2,
   },
   itemImage: {
     flex: 2,
