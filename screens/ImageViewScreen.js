@@ -1,6 +1,6 @@
 import * as React from "react";
 import { Image, View, Text } from "react-native";
-import { useNavigation } from "@react-navigation/native";
+import { stringifyMetadata } from "../utilities/Metadata";
 
 import Layout from "../constants/Layout";
 
@@ -25,17 +25,6 @@ export function ImageViewScreen(props) {
   );
 }
 
-let id = 0;
-
-function stringifyMetadata([key, value]) {
-  return (
-    <Text key={id++}>
-      <Text style={{ fontWeight: "bold" }}>{key.toString()}: </Text>
-      {value.toString()}
-    </Text>
-  );
-}
-
 const styles = {
   screenContainer: {
     flex: 1,
@@ -44,6 +33,7 @@ const styles = {
   imageStyle: {
     height: Layout.window.height / 2,
     resizeMode: "contain",
+    marginVertical: 10,
   },
   displayDataContainer: {
     flexDirection: "column",

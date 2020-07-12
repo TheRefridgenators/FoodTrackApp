@@ -30,7 +30,11 @@ export default function InventoryItem(props) {
       contents={itemContents}
       useArrow={true}
       onPress={() =>
-        navigate("ItemInfo", { test: "hi", itemName: props.itemName })
+        navigate("ItemInfo", {
+          test: "hi",
+          itemName: props.itemName,
+          imageLink: props.imageLink,
+        })
       }
     />
   );

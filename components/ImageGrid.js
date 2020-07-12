@@ -2,7 +2,7 @@ import * as React from "react";
 import { Image, View, ScrollView } from "react-native";
 
 import Layout from "../constants/Layout";
-import { TouchableImageWithMetadata } from "./ImageWithMetadata";
+import { TouchableImageWithMetadata } from "./TouchableImageWithMetadata";
 
 // TODO: Rename this to better reflect its purpose
 const gridDataTemplate = {
@@ -60,6 +60,7 @@ function gridRowToJSX(row, imgStyle) {
           metadata={metadata}
           imageStyle={styles.gridImg}
           imageLink={itemLink}
+          showTimestamp={true}
         />
       ))}
     </View>
@@ -83,6 +84,7 @@ const styles = {
     flex: 1,
     flexDirection: "column",
     width: "100%",
+    marginTop: 5,
   },
   gridRow: {
     flexDirection: "row",
