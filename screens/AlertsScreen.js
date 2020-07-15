@@ -8,7 +8,6 @@ import { TypedAlert } from "../components/TypedAlert";
 export function AlertsScreen(props) {
   return (
     <View style={styles.screenContainer}>
-      <Text>This is the alerts screen.</Text>
       <TypedAlert
         purpose="ask"
         summary="Is this an apple?"

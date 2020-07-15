@@ -2,7 +2,6 @@ import * as React from "react";
 import { View, Image, Text, TouchableOpacity } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 
-import { FullWidthButton } from "./FullWidthButton";
 import { useProperArticle } from "../utilities/Inventory";
 
 // Props:
@@ -15,24 +14,12 @@ import { useProperArticle } from "../utilities/Inventory";
  * and the name of the item, respectively.
  */
 export default function InventoryItem(props) {
-  const { navigate } = useNavigation();
-
-  const itemContents = (
-    <View style={{ flexDirection: "row" }}>
-      <Image source={{ uri: props.imageLink }} style={styles.itemImage} />
-      <View style={styles.infoContainer}>
-        <Text>Here's {useProperArticle(props.itemName)}!</Text>
-        <Text>Here's some "information."</Text>
-      </View>
-    </View>
-  );
-
   return (
     <View style={styles.contentContainer}>
       <Image source={{ uri: props.imageLink }} style={styles.itemImage} />
       <View style={styles.infoContainer}>
         <Text>Here's {useProperArticle(props.itemName)}!</Text>
-        <Text>Here's some "information."</Text>
+        <Text>Uses: {props.useClass}</Text>
       </View>
     </View>
   );

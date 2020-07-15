@@ -11,6 +11,7 @@ web-build/
 .vscode/*
 interfacing/*
 config.js
+Firebase Stuff/*
 
 # macOS
 .DS_Store
