@@ -3,6 +3,7 @@ import { Image, StyleSheet, Text, View } from "react-native";
 import Moment from "moment";
 
 import ImageGrid from "../components/ImageGrid";
+import { formatTimestamp } from "../utilities/Metadata";
 
 export function SnapshotsScreen() {
   return (
@@ -12,7 +13,7 @@ export function SnapshotsScreen() {
           "http://192.168.1.55:3000/images/Apple.jpg",
           {
             apple: true,
-            timestamp: Moment(),
+            timestamp: formatTimestamp(Moment()),
           },
         ])}
         maxWidth={3}
@@ -21,15 +22,9 @@ export function SnapshotsScreen() {
   );
 }
 
-const appleImgScale = 0.5;
-
 const styles = {
   container: {
     flex: 1,
     alignItems: "center",
-  },
-  appleImg: {
-    width: 474 * appleImgScale,
-    height: 537 * appleImgScale,
   },
 };

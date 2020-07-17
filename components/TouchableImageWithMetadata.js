@@ -1,6 +1,5 @@
 import * as React from "react";
-import { Image, View, Text } from "react-native";
-import { TouchableOpacity } from "react-native-gesture-handler";
+import { Image, View, Text, TouchableOpacity } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import Moment from "moment";
 
@@ -22,21 +21,17 @@ export function TouchableImageWithMetadata(props) {
           navigate("ImageView", {
             metadata: props.metadata,
             imageLink: props.imageLink,
-            timestamp: formatTimestamp(Moment()),
+            timestamp: props.metadata.timestamp,
           })
         }
       >
         <Image source={{ uri: props.imageLink }} style={props.imageStyle} />
       </TouchableOpacity>
       {props.showTimestamp && (
-        <Text>{props.metadata.timestamp.format("M/DD [at] h:mm A")}</Text>
+        <Text style={styles.timestampText}>{props.metadata.timestamp}</Text>
       )}
     </View>
   );
-}
-
-function formatTimestamp(dateObj) {
-  return dateObj.format("MMMM Do[,] YYYY [at] h:mm A");
 }
 
 const styles = {
@@ -45,6 +40,6 @@ const styles = {
     alignItems: "center",
   },
   timestampText: {
-    marginTop: 5,
+    fontSize: 12,
   },
 };

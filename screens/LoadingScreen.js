@@ -2,16 +2,21 @@ import * as React from "react";
 import { Text, View, ActivityIndicator } from "react-native";
 
 import firebase from "firebase/app";
+import "firebase/auth";
 
 export class LoadingScreen extends React.Component {
   checkIfLoggedIn = () => {
     firebase.auth().onAuthStateChanged((user) => {
       if (user) {
         console.log("user logged in");
-        firebase.firestore().collection("users").doc(user.uid).set({
-          lastLoggedIn: Date.now(),
-          email: user.email,
-        });
+
+        try {
+          firebase.firestore().collection("users").doc(user.uid).update({
+            lastLoggedIn: new Date(),
+          });
+        } catch (error) {
+          console.log("Unable to update user: ", error);
+        }
 
         firebase
           .firestore()

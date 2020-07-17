@@ -1,6 +1,5 @@
 import * as React from "react";
-import { View, Text } from "react-native";
-import { TouchableOpacity } from "react-native-gesture-handler";
+import { View, Text, TouchableOpacity } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
 
 // Logging in/database access
@@ -38,9 +37,24 @@ async function logInUser(onLogin) {
 
       // Log in user
       await firebase.auth().signInWithCredential(userCredential);
-    }
+      const currentUser = firebase.auth().currentUser;
 
-    onLogin();
+      const registeredUsers = await firebase
+        .firestore()
+        .collection("users")
+        .get();
+
+      if (registeredUsers.docs.every((doc) => doc.id !== currentUser.uid)) {
+        const now = new Date();
+        await firebase.firestore().doc(`users/${currentUser.uid}`).set({
+          createdAt: now,
+          lastLoggedIn: now,
+          email: user.email,
+        });
+      }
+
+      onLogin();
+    }
   } catch (error) {
     console.log(error);
   }
