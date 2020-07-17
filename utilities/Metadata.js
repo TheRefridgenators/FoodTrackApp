@@ -12,6 +12,10 @@ export function stringifyMetadata([key, value]) {
   );
 }
 
+export function formatTimestamp(dateObj) {
+  return dateObj.format("M/D/YYYY [at] h:mm A");
+}
+
 function capitalizeFirstLetters(str) {
   return str.replace(/\b\w/g, (char) => char.toUpperCase());
 }
