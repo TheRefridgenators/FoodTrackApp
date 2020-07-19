@@ -1,5 +1,5 @@
 import * as React from "react";
-import { View, Text } from "react-native";
+import { View, StyleSheet } from "react-native";
 
 import { TypedAlert } from "../components/TypedAlert";
 
@@ -18,6 +18,8 @@ export function AlertsScreen(props) {
   );
 }
 
-const styles = {
-  screenContainer: {},
-};
+const styles = StyleSheet.create({
+  screenContainer: {
+    flex: 1,
+  },
+});

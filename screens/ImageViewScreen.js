@@ -1,5 +1,5 @@
 import * as React from "react";
-import { Image, View, Text } from "react-native";
+import { Image, View, Text, StyleSheet } from "react-native";
 import { stringifyMetadata } from "../utilities/Metadata";
 
 import Layout from "../constants/Layout";
@@ -25,7 +25,7 @@ export function ImageViewScreen(props) {
   );
 }
 
-const styles = {
+const styles = StyleSheet.create({
   screenContainer: {
     flex: 1,
     flexDirection: "column",
@@ -39,4 +39,4 @@ const styles = {
     flexDirection: "column",
     alignItems: "center",
   },
-};
+});

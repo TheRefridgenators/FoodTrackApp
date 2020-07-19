@@ -1,5 +1,5 @@
 import * as React from "react";
-import { Image, StyleSheet, Text, View } from "react-native";
+import { Text, View, StyleSheet } from "react-native";
 import Moment from "moment";
 
 import ImageGrid from "../components/ImageGrid";
@@ -22,9 +22,9 @@ export function SnapshotsScreen() {
   );
 }
 
-const styles = {
+const styles = StyleSheet.create({
   container: {
     flex: 1,
     alignItems: "center",
   },
-};
+});

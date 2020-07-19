@@ -1,68 +1,19 @@
 import * as React from "react";
-import { Image, View, ScrollView, Text } from "react-native";
+import { View, ScrollView, Text, StyleSheet } from "react-native";
+import * as Notifications from "expo-notifications";
 
-import firebase, { storage } from "firebase/app";
+import firebase from "firebase/app";
 import "firebase/firestore";
 import "firebase/storage";
 
 import InventoryItem from "../components/InventoryItem";
+import { registerForNotificationsAsync } from "../utilities/Notifications";
 
-let count = 0;
-
-export class InventoryScreen extends React.Component {
-  constructor(props) {
-    super(props);
-
-    this.state = {
-      items: [],
-    };
-  }
-
-  getUserItems = async () => {
-    const currentUser = firebase.auth().currentUser;
-
-    const itemCollection = await firebase
-      .firestore()
-      .collection(`users/${currentUser.uid}/items`)
-      .get();
-
-    let tempItems = [];
-    itemCollection.docs.forEach((doc) => {
-      const data = doc.data();
-
-      if (doc.id !== "metadata") {
-        tempItems.push({ name: doc.id, data });
-      }
-    });
-
-    this.setState({ items: tempItems });
-  };
-
-  componentDidMount = () => {
-    this.getUserItems();
-  };
-
-  render() {
-    const itemComponents = this.state.items.map(documentToInventoryItem);
-
-    if (itemComponents.length === 0) {
-      return (
-        <View style={styles.noItemsContainer}>
-          <Text style={styles.noItemsText}>No items yet.</Text>
-        </View>
-      );
-    } else {
-      return <ScrollView>{itemComponents}</ScrollView>;
-    }
-  }
-}
-
-export default function InventoryScreenFunc(props) {
+export default function InventoryScreen(props) {
   const currentUser = firebase.auth().currentUser;
 
   const [items, setItems] = React.useState([]);
   const [storageApple, setStorageApple] = React.useState("");
-  //const [gotItems, setGotItems] = React.useState(false);
 
   React.useEffect(() => {
     const getUserItems = async () => {
@@ -80,12 +31,6 @@ export default function InventoryScreenFunc(props) {
         }
       });
 
-      /*
-      if (!gotItems) {
-        setItems(tempItems);
-        setGotItems(true);
-      }
-      */
       setItems(tempItems);
     };
 
@@ -100,6 +45,10 @@ export default function InventoryScreenFunc(props) {
       setStorageApple(imageLinkRef);
     };
     getImageLink();
+  }, []);
+
+  React.useEffect(() => {
+    registerForNotificationsAsync();
   }, []);
 
   const itemComponents = items.map(documentToInventoryItem);
@@ -135,7 +84,7 @@ function documentToInventoryItem(document) {
   );
 }
 
-const styles = {
+const styles = StyleSheet.create({
   noItemsText: {
     fontSize: 20,
   },
@@ -144,4 +93,4 @@ const styles = {
     justifyContent: "center",
     alignItems: "center",
   },
-};
+});

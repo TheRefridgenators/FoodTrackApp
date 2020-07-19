@@ -1,5 +1,5 @@
 import * as React from "react";
-import { Image, View, ScrollView } from "react-native";
+import { StyleSheet, View, ScrollView } from "react-native";
 
 import Layout from "../constants/Layout";
 import { TouchableImageWithMetadata } from "./TouchableImageWithMetadata";
@@ -79,7 +79,7 @@ function deepObjClone(obj) {
   return JSON.parse(JSON.stringify(obj));
 }
 
-const styles = {
+const styles = StyleSheet.create({
   gridContainer: {
     flex: 1,
     flexDirection: "column",
@@ -98,4 +98,4 @@ const styles = {
     borderWidth: 3,
     borderRadius: 3,
   },
-};
+});

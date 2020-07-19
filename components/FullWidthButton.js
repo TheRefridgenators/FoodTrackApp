@@ -1,5 +1,5 @@
 import * as React from "react";
-import { View, TouchableOpacity } from "react-native";
+import { View, StyleSheet, TouchableOpacity } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
 
 /**
@@ -23,7 +23,7 @@ export function FullWidthButton(props) {
   );
 }
 
-const styles = {
+const styles = StyleSheet.create({
   buttonContainer: {
     flexDirection: "row",
     justifyContent: "center",
@@ -44,4 +44,4 @@ const styles = {
   arrowIcon: {
     marginHorizontal: 10,
   },
-};
+});

@@ -1,15 +1,11 @@
 import * as React from "react";
-import { View, Text, Image } from "react-native";
+import { View, Text, Image, StyleSheet } from "react-native";
 
-import { FullWidthButton } from "../components/FullWidthButton";
 import Layout from "../constants/Layout";
 
-const contents = (
-  <View>
-    <Text>Hello!</Text>
-  </View>
-);
-
+/**
+ * @deprecated
+ */
 export function ItemInfoScreen(props) {
   const { test, imageLink, itemInfo } = props.route.params;
 
@@ -26,7 +22,7 @@ export function ItemInfoScreen(props) {
   );
 }
 
-const styles = {
+const styles = StyleSheet.create({
   dataContainer: {
     flex: 1,
     flexDirection: "column",
@@ -37,4 +33,4 @@ const styles = {
     height: Layout.window.height / 2 - 10,
     resizeMode: "contain",
   },
-};
+});

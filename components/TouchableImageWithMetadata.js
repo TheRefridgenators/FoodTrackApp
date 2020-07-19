@@ -1,5 +1,5 @@
 import * as React from "react";
-import { Image, View, Text, TouchableOpacity } from "react-native";
+import { Image, View, Text, StyleSheet, TouchableOpacity } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import Moment from "moment";
 
@@ -34,7 +34,7 @@ export function TouchableImageWithMetadata(props) {
   );
 }
 
-const styles = {
+const styles = StyleSheet.create({
   contentContainer: {
     flexDirection: "column",
     alignItems: "center",
@@ -42,4 +42,4 @@ const styles = {
   timestampText: {
     fontSize: 12,
   },
-};
+});

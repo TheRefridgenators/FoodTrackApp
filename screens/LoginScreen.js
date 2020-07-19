@@ -1,6 +1,7 @@
 import * as React from "react";
-import { View, Text, TouchableOpacity } from "react-native";
+import { View, Text, TouchableOpacity, StyleSheet } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
+import * as Notifications from "expo-notifications";
 
 // Logging in/database access
 import * as firebase from "firebase/app";
@@ -60,7 +61,7 @@ async function logInUser(onLogin) {
   }
 }
 
-const styles = {
+const styles = StyleSheet.create({
   screenContainer: {
     flex: 1,
     flexDirection: "column",
@@ -74,4 +75,4 @@ const styles = {
     borderRadius: 5,
     padding: 10,
   },
-};
+});

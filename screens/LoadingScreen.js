@@ -1,5 +1,5 @@
 import * as React from "react";
-import { Text, View, ActivityIndicator } from "react-native";
+import { Text, View, ActivityIndicator, StyleSheet } from "react-native";
 
 import firebase from "firebase/app";
 import "firebase/auth";
@@ -54,7 +54,7 @@ export class LoadingScreen extends React.Component {
   }
 }
 
-const styles = {
+const styles = StyleSheet.create({
   screenContainer: {
     flex: 1,
     flexDirection: "column",
@@ -65,4 +65,4 @@ const styles = {
     marginVertical: 10,
     fontSize: 30,
   },
-};
+});

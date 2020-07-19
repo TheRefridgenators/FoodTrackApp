@@ -1,5 +1,5 @@
 import * as React from "react";
-import { View, Image, Text, TouchableOpacity } from "react-native";
+import { View, Image, Text, StyleSheet } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 
 import { useProperArticle } from "../utilities/Inventory";
@@ -25,7 +25,7 @@ export default function InventoryItem(props) {
   );
 }
 
-const styles = {
+const styles = StyleSheet.create({
   contentContainer: {
     flexDirection: "row",
     backgroundColor: "white",
@@ -45,4 +45,4 @@ const styles = {
     justifyContent: "center",
     alignItems: "center",
   },
-};
+});

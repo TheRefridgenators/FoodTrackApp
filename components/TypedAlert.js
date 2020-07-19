@@ -1,5 +1,5 @@
 import * as React from "react";
-import { Image, Text, TouchableOpacity, View } from "react-native";
+import { Image, Text, TouchableOpacity, View, StyleSheet } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
 
 import { FullWidthButton } from "../components/FullWidthButton";
@@ -41,7 +41,7 @@ function feedbackBoxes(onYes, onNo) {
   );
 }
 
-const styles = {
+const styles = StyleSheet.create({
   alertContainer: {
     flexDirection: "row",
     justifyContent: "space-between",
@@ -67,4 +67,4 @@ const styles = {
     height: 100,
     resizeMode: "contain",
   },
-};
+});
