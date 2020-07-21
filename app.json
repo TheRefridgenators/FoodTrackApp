@@ -1,12 +1,8 @@
 {
   "expo": {
-    "name": "FoodTrackApp",
-    "slug": "FoodTrackApp",
-    "platforms": [
-      "ios",
-      "android",
-      "web"
-    ],
+    "name": "FoodTrack",
+    "slug": "FoodTrack",
+    "platforms": ["ios", "android"],
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/images/icon.png",
@@ -19,14 +15,16 @@
     "updates": {
       "fallbackToCacheTimeout": 0
     },
-    "assetBundlePatterns": [
-      "**/*"
-    ],
+    "assetBundlePatterns": ["**/*"],
     "ios": {
+      "bundleIdentifier": "com.therefridgenators.foodtrack",
+      "buildNumber": "1.0.0",
       "supportsTablet": true
     },
-    "web": {
-      "favicon": "./assets/images/favicon.png"
+    "android": {
+      "useNextNotificationsApi": true,
+      "package": "com.therefridgenators.foodtrack",
+      "versionCode": 1
     }
   }
 }

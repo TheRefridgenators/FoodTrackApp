@@ -73,6 +73,8 @@ export default function InventoryScreen(props) {
   }
 }
 
+let count = 0;
+
 function documentToInventoryItem(document) {
   return (
     <InventoryItem
