@@ -6,6 +6,7 @@ import firebase from "firebase/app";
 
 import ImageGrid from "../components/ImageGrid";
 import { formatTimestamp } from "../utilities/Metadata";
+import { ScrollView } from "react-native-gesture-handler";
 
 export function SnapshotsScreen() {
   const [snapshots, setSnapshots] = React.useState([]);
@@ -38,16 +39,23 @@ export function SnapshotsScreen() {
     if (currentUser) getSnapshots();
   }, []);
 
-  return (
-    <View style={[styles.container, styles.screenCenter]}>
+  return snapshots.length > 0 ? (
+    <ScrollView style={styles.container}>
       <ImageGrid images={snapshots} maxWidth={3} />
+    </ScrollView>
+  ) : (
+    <View style={[styles.gridContainer, styles.missingTextContainer]}>
+      <Text>No snapshots yet.</Text>
     </View>
   );
 }
 
 const styles = StyleSheet.create({
-  container: {
+  gridContainer: {
     flex: 1,
+  },
+  missingTextContainer: {
+    justifyContent: "center",
     alignItems: "center",
   },
 });

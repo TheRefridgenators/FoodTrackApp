@@ -33,7 +33,7 @@ export default function InventoryScreen(props) {
       setItems(tempItems);
     };
 
-    if (currentUser !== null) getUserItems();
+    if (currentUser) getUserItems();
 
     const getImageLink = async () => {
       const imageLinkRef = await firebase

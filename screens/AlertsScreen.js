@@ -38,7 +38,13 @@ export function AlertsScreen() {
     fetchUserAlerts();
   }, []);
 
-  return <ScrollView style={styles.screenContainer}>{userAlerts}</ScrollView>;
+  return userAlerts.length > 0 ? (
+    <ScrollView style={styles.screenContainer}>{userAlerts}</ScrollView>
+  ) : (
+    <View>
+      <Text style={styles.screenContainer}>No alerts yet.</Text>
+    </View>
+  );
 }
 
 let count = 0;
