@@ -40,21 +40,23 @@ async function logInUser(onLogin) {
       await firebase.auth().signInWithCredential(userCredential);
       const currentUser = firebase.auth().currentUser;
 
-      const registeredUsers = await firebase
-        .firestore()
-        .collection("users")
-        .get();
+      if (currentUser) {
+        const registeredUsers = await firebase
+          .firestore()
+          .collection("users")
+          .get();
 
-      if (registeredUsers.docs.every((doc) => doc.id !== currentUser.uid)) {
-        const now = new Date();
-        await firebase.firestore().doc(`users/${currentUser.uid}`).set({
-          createdAt: now,
-          lastLoggedIn: now,
-          email: user.email,
-        });
+        if (registeredUsers.docs.every((doc) => doc.id !== currentUser.uid)) {
+          const now = new Date();
+          await firebase.firestore().doc(`users/${currentUser.uid}`).set({
+            createdAt: now,
+            lastLoggedIn: now,
+            email: user.email,
+          });
+        }
+
+        onLogin();
       }
-
-      onLogin();
     }
   } catch (error) {
     console.log(error);

@@ -18,18 +18,10 @@ export class LoadingScreen extends React.Component {
           console.log("Unable to update user: ", error);
         }
 
-        firebase
-          .firestore()
-          .collection(`users/${user.uid}/items`)
-          .get()
-          .then((snapshot) => {
-            if (snapshot.empty) {
-              firebase
-                .firestore()
-                .doc(`users/${user.uid}/items/metadata`)
-                .set({ initialized: true });
-            }
-          });
+        // Initialize collections for current items/past snapshots
+        this.initializeNewCollection(user.uid, "items");
+        this.initializeNewCollection(user.uid, "snapshots");
+        this.initializeNewCollection(user.uid, "alerts");
 
         this.props.onLogin();
       } else {
@@ -38,6 +30,28 @@ export class LoadingScreen extends React.Component {
 
       this.props.onLoad();
     });
+  };
+
+  initializeNewCollection = (userUid, collectionName) => {
+    const collectionPath = `users/${userUid}/${collectionName}`;
+
+    try {
+      firebase
+        .firestore()
+        .collection(collectionPath)
+        .get()
+        .then((snapshot) => {
+          if (snapshot.empty) {
+            firebase
+              .firestore()
+              .collection(collectionPath)
+              .doc("metadata")
+              .set({ initialized: true });
+          }
+        });
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   componentDidMount = () => {

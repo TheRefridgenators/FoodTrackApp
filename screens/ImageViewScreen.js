@@ -1,6 +1,5 @@
 import * as React from "react";
-import { Image, View, Text, StyleSheet } from "react-native";
-import { stringifyMetadata } from "../utilities/Metadata";
+import { View, Text, StyleSheet } from "react-native";
 
 import Layout from "../constants/Layout";
 
@@ -18,8 +17,7 @@ export function ImageViewScreen(props) {
         <Image source={{ uri: imageLink }} style={styles.imageStyle} />
       )}
       <View style={styles.displayDataContainer}>
-        <Text>Here's your data: </Text>
-        {Object.entries(metadata).map(stringifyMetadata)}
+        <Text style={styles.timestampText}>Taken {metadata.timestamp}</Text>
       </View>
     </View>
   );
@@ -38,5 +36,9 @@ const styles = StyleSheet.create({
   displayDataContainer: {
     flexDirection: "column",
     alignItems: "center",
+  },
+  timestampText: {
+    fontWeight: "bold",
+    fontSize: 20,
   },
 });

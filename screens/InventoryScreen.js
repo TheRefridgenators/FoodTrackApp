@@ -1,6 +1,5 @@
 import * as React from "react";
 import { View, ScrollView, Text, StyleSheet } from "react-native";
-import * as Notifications from "expo-notifications";
 
 import firebase from "firebase/app";
 import "firebase/firestore";
