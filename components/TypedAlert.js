@@ -1,5 +1,5 @@
 import * as React from "react";
-import { Image, Text, TouchableOpacity, View, StyleSheet } from "react-native";
+import { Image, Text, TouchableOpacity, StyleSheet, View } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
 
 import { FullWidthButton } from "../components/FullWidthButton";
@@ -22,7 +22,12 @@ export function TypedAlert(props) {
       {props.imageLink && (
         <Image source={{ uri: props.imageLink }} style={styles.alertImage} />
       )}
-      <Text style={{ flex: 4, textAlign: "center" }}>{props.summary}</Text>
+      <View style={styles.summaryContainer}>
+        <Text style={styles.summaryText}>{props.summary}</Text>
+      </View>
+      <View style={styles.timestampContainer}>
+        <Text style={styles.timestampText}>{props.timestamp}</Text>
+      </View>
       {props.purpose === "ask" && feedbackBoxes(null, null)}
     </View>
   );
@@ -43,14 +48,16 @@ function feedbackBoxes(onYes, onNo) {
 
 const styles = StyleSheet.create({
   alertContainer: {
-    flexDirection: "row",
-    justifyContent: "space-between",
+    flexDirection: "column",
+    justifyContent: "center",
     alignItems: "center",
     backgroundColor: "white",
     borderTopColor: "gray",
     borderTopWidth: 2,
     borderBottomColor: "gray",
     borderBottomWidth: 2,
+    marginBottom: -2,
+    minHeight: 100,
   },
   feedbackContainer: {
     flex: 1,
@@ -66,5 +73,23 @@ const styles = StyleSheet.create({
     flex: 2,
     height: 100,
     resizeMode: "contain",
+  },
+  timestampContainer: {
+    flex: 1,
+    width: "100%",
+    flexDirection: "row",
+    justifyContent: "flex-end",
+  },
+  timestampText: {
+    color: "#ccc",
+    marginRight: 5,
+  },
+  summaryContainer: {
+    flex: 4,
+    justifyContent: "center",
+    alignItems: "center",
+  },
+  summaryText: {
+    marginTop: 10,
   },
 });

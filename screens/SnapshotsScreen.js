@@ -33,7 +33,6 @@ export function SnapshotsScreen() {
         .sort((snap1, snap2) => snap2[1].timestamp - snap1[1].timestamp); // Sorted in descending order
 
       setSnapshots(formattedSnapshots);
-      console.log("snapshots :>> ", snapshots);
     };
 
     if (currentUser) getSnapshots();

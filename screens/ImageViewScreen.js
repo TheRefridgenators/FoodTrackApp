@@ -1,5 +1,5 @@
 import * as React from "react";
-import { View, Text, StyleSheet } from "react-native";
+import { Image, View, Text, StyleSheet } from "react-native";
 
 import Layout from "../constants/Layout";
 
