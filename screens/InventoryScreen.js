@@ -8,11 +8,10 @@ import "firebase/storage";
 import InventoryItem from "../components/InventoryItem";
 import { registerForNotificationsAsync } from "../utilities/Notifications";
 
-export default function InventoryScreen(props) {
+export default function InventoryScreen() {
   const currentUser = firebase.auth().currentUser;
 
   const [items, setItems] = React.useState([]);
-  const [storageApple, setStorageApple] = React.useState("");
 
   React.useEffect(() => {
     const getUserItems = async () => {
@@ -34,16 +33,6 @@ export default function InventoryScreen(props) {
     };
 
     if (currentUser) getUserItems();
-
-    const getImageLink = async () => {
-      const imageLinkRef = await firebase
-        .storage()
-        .ref("foods/apple.jpg")
-        .getDownloadURL();
-
-      setStorageApple(imageLinkRef);
-    };
-    getImageLink();
   }, []);
 
   React.useEffect(() => {
@@ -59,16 +48,7 @@ export default function InventoryScreen(props) {
       </View>
     );
   } else {
-    return (
-      <ScrollView>
-        {items.map(documentToInventoryItem)}
-        <InventoryItem
-          imageLink={storageApple}
-          itemName="test"
-          useClass="single"
-        />
-      </ScrollView>
-    );
+    return <ScrollView>{items.map(documentToInventoryItem)}</ScrollView>;
   }
 }
 
