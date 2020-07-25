@@ -1,12 +1,11 @@
 import * as React from "react";
-import { View, StyleSheet } from "react-native";
+import { ScrollView, Text, View, StyleSheet, Image } from "react-native";
 import Moment from "moment";
 
 import firebase from "firebase/app";
 
 import ImageGrid from "../components/ImageGrid";
 import { formatTimestamp } from "../utilities/Metadata";
-import { ScrollView } from "react-native-gesture-handler";
 
 export function SnapshotsScreen() {
   const [snapshots, setSnapshots] = React.useState([]);
@@ -40,7 +39,7 @@ export function SnapshotsScreen() {
   }, []);
 
   return snapshots.length > 0 ? (
-    <ScrollView style={styles.container}>
+    <ScrollView style={styles.gridContainer}>
       <ImageGrid images={snapshots} maxWidth={3} />
     </ScrollView>
   ) : (
