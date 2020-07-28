@@ -25,7 +25,7 @@ export default function InventoryScreen() {
         const data = doc.data();
 
         if (doc.id !== "metadata") {
-          tempItems.push({ name: doc.id, data });
+          tempItems.push({ name: doc.id, ...data });
         }
       });
 
@@ -58,8 +58,8 @@ function documentToInventoryItem(document) {
   return (
     <InventoryItem
       itemName={document.name}
-      imageLink={document.data.imageLink}
-      useClass={document.data.useClass}
+      imageLink={document.imageLink}
+      useClass={document.useClass}
       key={count++}
     />
   );

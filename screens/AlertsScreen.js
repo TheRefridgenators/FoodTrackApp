@@ -39,7 +39,10 @@ export function AlertsScreen() {
   }, []);
 
   return userAlerts.length > 0 ? (
-    <ScrollView style={styles.screenContainer}>{userAlerts}</ScrollView>
+    <ScrollView style={styles.screenContainer}>
+      {userAlerts}
+      {/* <TypedAlert purpose="ask" summary="Ask alert test" imageLink="nope" /> */}
+    </ScrollView>
   ) : (
     <View>
       <Text style={styles.screenContainer}>No alerts yet.</Text>

@@ -1,6 +1,7 @@
 import * as React from "react";
 import { Image, Text, TouchableOpacity, StyleSheet, View } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
+import { useNavigation } from "@react-navigation/native";
 
 import { FullWidthButton } from "../components/FullWidthButton";
 import Colors from "../constants/Colors";
@@ -17,8 +18,16 @@ import Colors from "../constants/Colors";
  * TODO: Find a better way to document `props`.
  */
 export function TypedAlert(props) {
+  const { navigate } = useNavigation();
+
   return (
-    <View style={styles.alertContainer}>
+    <TouchableOpacity
+      style={styles.alertContainer}
+      onPress={() => {
+        props.purpose === "ask" &&
+          navigate("ItemIdent", { imageLink: props.imageLink });
+      }}
+    >
       {props.imageLink && (
         <Image source={{ uri: props.imageLink }} style={styles.alertImage} />
       )}
@@ -28,8 +37,10 @@ export function TypedAlert(props) {
       <View style={styles.timestampContainer}>
         <Text style={styles.timestampText}>{props.timestamp}</Text>
       </View>
-      {props.purpose === "ask" && feedbackBoxes(null, null)}
-    </View>
+      {props.purpose === "ask" && (
+        <Ionicons name="md-arrow-dropright" size={30} />
+      )}
+    </TouchableOpacity>
   );
 }
 
