@@ -15,18 +15,15 @@ export default function InventoryScreen() {
 
   React.useEffect(() => {
     const getUserItems = async () => {
-      const itemCollection = await firebase
+      const userDoc = await firebase
         .firestore()
-        .collection(`users/${currentUser.uid}/items`)
+        .doc(`users/${currentUser.uid}`)
         .get();
 
-      let tempItems = [];
-      itemCollection.docs.forEach((doc) => {
-        const data = doc.data();
+      const tempItems = [];
 
-        if (doc.id !== "metadata") {
-          tempItems.push({ name: doc.id, ...data });
-        }
+      userDoc.data().items.forEach(({ label, imageLink, useClass }) => {
+        tempItems.push({ name: label, imageLink, useClass });
       });
 
       setItems(tempItems);

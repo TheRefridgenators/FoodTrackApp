@@ -12,6 +12,7 @@ web-build/
 interfacing/*
 config.js
 Firebase Stuff/*
+google-services.json
 
 # macOS
 .DS_Store

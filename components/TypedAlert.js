@@ -28,18 +28,24 @@ export function TypedAlert(props) {
           navigate("ItemIdent", { imageLink: props.imageLink });
       }}
     >
-      {props.imageLink && (
-        <Image source={{ uri: props.imageLink }} style={styles.alertImage} />
-      )}
-      <View style={styles.summaryContainer}>
-        <Text style={styles.summaryText}>{props.summary}</Text>
+      <View style={styles.bodyContainer}>
+        {props.imageLink && (
+          <Image source={{ uri: props.imageLink }} style={styles.alertImage} />
+        )}
+        <View style={styles.summaryContainer}>
+          <Text style={styles.summaryText}>{props.summary}</Text>
+          {props.purpose === "ask" && (
+            <Ionicons
+              name="md-arrow-dropright"
+              size={30}
+              style={{ marginHorizontal: 20 }}
+            />
+          )}
+        </View>
       </View>
       <View style={styles.timestampContainer}>
         <Text style={styles.timestampText}>{props.timestamp}</Text>
       </View>
-      {props.purpose === "ask" && (
-        <Ionicons name="md-arrow-dropright" size={30} />
-      )}
     </TouchableOpacity>
   );
 }
@@ -81,14 +87,15 @@ const styles = StyleSheet.create({
     paddingHorizontal: 5,
   },
   alertImage: {
-    flex: 2,
+    flex: 0.5,
     height: 100,
     resizeMode: "contain",
   },
   timestampContainer: {
     flex: 1,
     width: "100%",
-    flexDirection: "row",
+    flexDirection: "column",
+    alignItems: "flex-end",
     justifyContent: "flex-end",
   },
   timestampText: {
@@ -96,11 +103,16 @@ const styles = StyleSheet.create({
     marginRight: 5,
   },
   summaryContainer: {
-    flex: 4,
-    justifyContent: "center",
-    alignItems: "center",
+    flexDirection: "row",
+    justifyContent: "flex-start",
   },
   summaryText: {
-    marginTop: 10,
+    marginTop: 7,
+  },
+  bodyContainer: {
+    flex: 2,
+    flexDirection: "row",
+    justifyContent: "flex-end",
+    alignItems: "center",
   },
 });

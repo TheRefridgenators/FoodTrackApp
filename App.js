@@ -13,6 +13,7 @@ import { ItemInfoScreen } from "./screens/ItemInfoScreen";
 import { ImageViewScreen } from "./screens/ImageViewScreen";
 import { LoginScreen } from "./screens/LoginScreen";
 import { LoadingScreen } from "./screens/LoadingScreen";
+import { ItemFeedbackScreen } from "./screens/ItemFeedbackScreen";
 
 const Stack = createStackNavigator();
 
@@ -59,6 +60,13 @@ export default function App() {
               component={ImageViewScreen}
               options={({ route }) => ({
                 headerTitle: route.params.timestamp,
+              })}
+            />
+            <Stack.Screen
+              name="ItemIdent"
+              component={ItemFeedbackScreen}
+              options={() => ({
+                headerTitle: "Identify an Item",
               })}
             />
           </Stack.Navigator>
