@@ -7,6 +7,7 @@ import "firebase/storage";
 
 import InventoryItem from "../components/InventoryItem";
 import { registerForNotificationsAsync } from "../utilities/Notifications";
+import { partialItemPathToLink } from "../utilities/Images";
 
 export default function InventoryScreen() {
   const currentUser = firebase.auth().currentUser;
@@ -22,9 +23,15 @@ export default function InventoryScreen() {
 
       const tempItems = [];
 
-      userDoc.data().items.forEach(({ label, imageLink, useClass }) => {
-        tempItems.push({ name: label, imageLink, useClass });
-      });
+      for (const item of userDoc.data().items) {
+        const imageLink = await partialItemPathToLink(item.filename);
+
+        tempItems.push({
+          name: item.label,
+          imageLink,
+          useClass: item.useClass,
+        });
+      }
 
       setItems(tempItems);
     };

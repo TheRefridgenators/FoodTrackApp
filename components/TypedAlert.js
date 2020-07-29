@@ -3,13 +3,12 @@ import { Image, Text, TouchableOpacity, StyleSheet, View } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
 import { useNavigation } from "@react-navigation/native";
 
-import { FullWidthButton } from "../components/FullWidthButton";
-import Colors from "../constants/Colors";
+import { partialItemPathToLink } from "../utilities/Images";
 
 /**
  * An alert that serves to either notify the user of something or ask something
  * of the user (clarification of item, etc.).
- * @param {{purpose: "notify" | "ask", imageLink: string, summary: string}} props The
+ * @param {{purpose: "notify" | "ask", imagePath: string, summary: string}} props The
  * options related to the type of alert and its contents, such as whether it
  * includes an image or the alert's purpose.
  * Leave `imageLink` uninitialized if no image is required.
@@ -19,18 +18,28 @@ import Colors from "../constants/Colors";
  */
 export function TypedAlert(props) {
   const { navigate } = useNavigation();
+  const [imageLink, setImageLink] = React.useState("not set");
+
+  React.useEffect(() => {
+    const getImageLink = async () => {
+      const imageURL = await partialItemPathToLink(props.imagePath);
+
+      setImageLink(imageURL);
+    };
+
+    getImageLink();
+  }, props.imagePath);
 
   return (
     <TouchableOpacity
       style={styles.alertContainer}
       onPress={() => {
-        props.purpose === "ask" &&
-          navigate("ItemIdent", { imageLink: props.imageLink });
+        props.purpose === "ask" && navigate("ItemIdent", { imageLink });
       }}
     >
       <View style={styles.bodyContainer}>
-        {props.imageLink && (
-          <Image source={{ uri: props.imageLink }} style={styles.alertImage} />
+        {imageLink && (
+          <Image source={{ uri: imageLink }} style={styles.alertImage} />
         )}
         <View style={styles.summaryContainer}>
           <Text style={styles.summaryText}>{props.summary}</Text>

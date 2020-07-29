@@ -64,6 +64,7 @@ function docToAlert(alertDoc) {
     <TypedAlert
       purpose="notify"
       summary={alertData.summary}
+      {...(alertData.imagePath && { imagePath: alertData.imagePath })}
       timestamp={formatTimestamp(Moment(alertData.timestamp.toDate()))}
       key={count++}
     />
