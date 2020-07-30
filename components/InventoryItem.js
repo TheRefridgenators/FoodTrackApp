@@ -1,5 +1,5 @@
 import * as React from "react";
-import { View, Image, Text, StyleSheet } from "react-native";
+import { View, Image, Text, StyleSheet, TouchableOpacity } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 
 import { useProperArticle } from "../utilities/Inventory";
@@ -14,17 +14,29 @@ import { useProperArticle } from "../utilities/Inventory";
  * and the name of the item, respectively.
  */
 export default function InventoryItem(props) {
+  const { navigate } = useNavigation();
+
   return (
-    <View style={styles.contentContainer}>
+    <TouchableOpacity
+      style={styles.contentContainer}
+      onPress={() => {
+        navigate("ItemIdent", {
+          imageLink: props.imageLink,
+          itemData: props.itemData,
+          defaultName: props.itemName,
+          defaultUseClass: props.useClass,
+        });
+      }}
+    >
       <Image
         source={{ uri: props.imageLink || "unavailable" }}
         style={styles.itemImage}
       />
       <View style={styles.infoContainer}>
-        <Text>Here's {useProperArticle(props.itemName)}!</Text>
+        <Text>Item: {props.itemName}</Text>
         <Text>Uses: {props.useClass}</Text>
       </View>
-    </View>
+    </TouchableOpacity>
   );
 }
 

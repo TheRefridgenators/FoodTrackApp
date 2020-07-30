@@ -35,6 +35,7 @@ export default function InventoryScreen() {
           name: item.label === "null" ? "unknown item" : item.label,
           imageLink,
           useClass: item.useClass,
+          itemData: item,
         });
       }
 
@@ -69,6 +70,7 @@ function documentToInventoryItem(document) {
       itemName={document.name}
       imageLink={document.imageLink}
       useClass={document.useClass === "single" ? "one" : "multiple"}
+      itemData={document.itemData}
       key={count++}
     />
   );

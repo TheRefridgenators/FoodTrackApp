@@ -10,10 +10,16 @@ import Layout from "../constants/Layout";
 
 export function ItemFeedbackScreen(props) {
   const { navigate } = useNavigation();
-  const { imageLink, itemData, alertId } = props.route.params;
+  const {
+    imageLink,
+    itemData,
+    alertId,
+    defaultName,
+    defaultUseClass,
+  } = props.route.params;
 
-  const [itemName, setItemName] = React.useState("");
-  const [useClass, setUseClass] = React.useState("");
+  const [itemName, setItemName] = React.useState(defaultName || "");
+  const [useClass, setUseClass] = React.useState(defaultUseClass || "");
   const [badInput, setBadInput] = React.useState(false);
 
   const inputBorderStyle = badInput
@@ -44,7 +50,9 @@ export function ItemFeedbackScreen(props) {
             return;
           } else {
             setBadInput(false);
-            const parsedUseClass = useClass.match(/^once/) ? "single" : "multi";
+            const parsedUseClass = useClass.match(/^once/i)
+              ? "single"
+              : "multi";
             await writeOverride(itemData, alertId, itemName, parsedUseClass);
             navigate("Root");
           }
@@ -72,7 +80,11 @@ async function writeOverride(itemData, alertId, itemName, useClass) {
     .set(overrideData);
 
   // Delete alert in firestore
-  await firebase.firestore().doc(`users/${userUid}/alerts/${alertId}`).delete();
+  if (alertId)
+    await firebase
+      .firestore()
+      .doc(`users/${userUid}/alerts/${alertId}`)
+      .delete();
 }
 
 function inputsValid(itemName, useClass) {
