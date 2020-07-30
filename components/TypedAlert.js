@@ -18,27 +18,37 @@ import { partialItemPathToLink } from "../utilities/Images";
  */
 export function TypedAlert(props) {
   const { navigate } = useNavigation();
-  const [imageLink, setImageLink] = React.useState("not set");
+  const [imageLink, setImageLink] = React.useState("");
+  console.log("props.imagePath :>> ", props.imagePath);
 
   React.useEffect(() => {
     const getImageLink = async () => {
-      const imageURL = await partialItemPathToLink(props.imagePath);
-
-      setImageLink(imageURL);
+      try {
+        const imageURL = await partialItemPathToLink(props.imagePath);
+        console.log("imageURL :>> ", imageURL);
+        setImageLink(imageURL);
+      } catch (error) {
+        console.log(error);
+      }
     };
 
-    getImageLink();
-  }, props.imagePath);
+    if (props.imagePath) getImageLink();
+  }, [props.imagePath]);
 
   return (
     <TouchableOpacity
       style={styles.alertContainer}
       onPress={() => {
-        props.purpose === "ask" && navigate("ItemIdent", { imageLink });
+        props.purpose === "ask" &&
+          navigate("ItemIdent", {
+            imageLink,
+            itemData: props.itemData,
+            alertId: props.alertId,
+          });
       }}
     >
       <View style={styles.bodyContainer}>
-        {imageLink && (
+        {imageLink.length > 0 && (
           <Image source={{ uri: imageLink }} style={styles.alertImage} />
         )}
         <View style={styles.summaryContainer}>

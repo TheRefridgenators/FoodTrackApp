@@ -24,7 +24,11 @@ export default function InventoryScreen() {
       const tempItems = [];
 
       for (const item of userDoc.data().items) {
-        const imageLink = await partialItemPathToLink(item.filename);
+        let imageLink = "";
+
+        if (item.imagePath) {
+          imageLink = await partialItemPathToLink(item.imagePath);
+        }
 
         tempItems.push({
           name: item.label,
@@ -63,7 +67,7 @@ function documentToInventoryItem(document) {
     <InventoryItem
       itemName={document.name}
       imageLink={document.imageLink}
-      useClass={document.useClass}
+      useClass={document.useClass === "single" ? "one" : "multiple"}
       key={count++}
     />
   );

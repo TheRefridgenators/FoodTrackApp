@@ -39,15 +39,7 @@ export function AlertsScreen() {
   }, []);
 
   return userAlerts.length > 0 ? (
-    <ScrollView style={styles.screenContainer}>
-      {userAlerts}
-      <TypedAlert
-        purpose="ask"
-        summary="Ask alert test"
-        imageLink="https://images.pexels.com/photos/102104/pexels-photo-102104.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260"
-        timestamp="7/22/20 at 7:30 AM"
-      />
-    </ScrollView>
+    <ScrollView style={styles.screenContainer}>{userAlerts}</ScrollView>
   ) : (
     <View>
       <Text style={styles.screenContainer}>No alerts yet.</Text>
@@ -59,13 +51,16 @@ let count = 0;
 
 function docToAlert(alertDoc) {
   const alertData = alertDoc.data();
+  console.log("alertData :>> ", alertData);
 
   return (
     <TypedAlert
-      purpose="notify"
+      purpose={alertData.purpose}
       summary={alertData.summary}
-      {...(alertData.imagePath && { imagePath: alertData.imagePath })}
+      imagePath={alertData.itemData?.imagePath}
+      itemData={alertData.itemData}
       timestamp={formatTimestamp(Moment(alertData.timestamp.toDate()))}
+      alertId={alertDoc.id}
       key={count++}
     />
   );

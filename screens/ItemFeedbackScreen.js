@@ -1,16 +1,16 @@
 import * as React from "react";
 import { Image, View, Text, StyleSheet, TextInput, Button } from "react-native";
-import { Picker } from "@react-native-community/picker";
 import { useNavigation } from "@react-navigation/native";
-//import MultipleChoice from "react-native-multiple-choice-picker";
-import { MultipleChoice } from "../components/MultipleChoice";
+
+import firebase from "firebase";
+import "firebase/firestore";
+import "firebase/auth";
 
 import Layout from "../constants/Layout";
 
 export function ItemFeedbackScreen(props) {
   const { navigate } = useNavigation();
-  const { imageLink } = props.route.params;
-  console.log("imageLink :>> ", imageLink);
+  const { imageLink, itemData, alertId } = props.route.params;
 
   const [itemName, setItemName] = React.useState("");
   const [useClass, setUseClass] = React.useState("");
@@ -44,11 +44,37 @@ export function ItemFeedbackScreen(props) {
             return;
           } else {
             setBadInput(false);
+            const parsedUseClass = useClass.match(/^once/) ? "single" : "multi";
+            await writeOverride(itemData, alertId, itemName, parsedUseClass);
+            navigate("Root");
           }
         }}
       />
     </View>
   );
+}
+
+async function writeOverride(itemData, alertId, itemName, useClass) {
+  const userUid = firebase.auth().currentUser.uid;
+
+  const overrideData = {
+    label: itemName,
+    useClass,
+    confidence: itemData.confidence,
+    area: itemData.area,
+  };
+
+  // Write override
+  await firebase
+    .firestore()
+    .collection(`users/${userUid}/overrides`)
+    .doc()
+    .set(overrideData);
+
+  console.log("alertId :>> ", alertId);
+
+  // Delete alert in firestore
+  await firebase.firestore().doc(`users/${userUid}/alerts/${alertId}`).delete();
 }
 
 function inputsValid(itemName, useClass) {

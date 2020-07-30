@@ -14,15 +14,24 @@ export function SnapshotsScreen() {
     const currentUser = firebase.auth().currentUser;
 
     const getSnapshots = async () => {
-      const userSnapshots = await firebase
+      const userSnapshotColl = await firebase
         .firestore()
         .collection(`users/${currentUser.uid}/snapshots`)
         .get();
 
-      const formattedSnapshots = userSnapshots.docs
-        .filter((doc) => doc.id !== "metadata")
-        .map((doc) => {
-          const { imageLink, timestamp: rawTimestamp } = doc.data();
+      const userSnapshots = userSnapshotColl.docs.filter(
+        (doc) => doc.id !== "metadata"
+      );
+
+      const formattedSnapshots = await Promise.all(
+        userSnapshots.map(async (doc) => {
+          const { filename, timestamp: rawTimestamp } = doc.data();
+
+          const imageLink = await firebase
+            .storage()
+            .ref(`snapshots/${currentUser.uid}/${filename}`)
+            .getDownloadURL();
+
           return [
             imageLink,
             {
@@ -30,9 +39,13 @@ export function SnapshotsScreen() {
             },
           ];
         })
-        .sort((snap1, snap2) => snap2[1].timestamp - snap1[1].timestamp); // Sorted in descending order
+      );
 
-      setSnapshots(formattedSnapshots);
+      const sortedSnapshots = formattedSnapshots.sort(
+        (snap1, snap2) => snap2[1].timestamp - snap1[1].timestamp
+      ); // Sorted in descending date order
+
+      setSnapshots(sortedSnapshots);
     };
 
     if (currentUser) getSnapshots();

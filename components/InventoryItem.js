@@ -16,7 +16,10 @@ import { useProperArticle } from "../utilities/Inventory";
 export default function InventoryItem(props) {
   return (
     <View style={styles.contentContainer}>
-      <Image source={{ uri: props.imageLink }} style={styles.itemImage} />
+      <Image
+        source={{ uri: props.imageLink || "unavailable" }}
+        style={styles.itemImage}
+      />
       <View style={styles.infoContainer}>
         <Text>Here's {useProperArticle(props.itemName)}!</Text>
         <Text>Uses: {props.useClass}</Text>
