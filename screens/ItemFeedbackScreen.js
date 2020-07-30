@@ -71,8 +71,6 @@ async function writeOverride(itemData, alertId, itemName, useClass) {
     .doc()
     .set(overrideData);
 
-  console.log("alertId :>> ", alertId);
-
   // Delete alert in firestore
   await firebase.firestore().doc(`users/${userUid}/alerts/${alertId}`).delete();
 }

@@ -19,13 +19,11 @@ import { partialItemPathToLink } from "../utilities/Images";
 export function TypedAlert(props) {
   const { navigate } = useNavigation();
   const [imageLink, setImageLink] = React.useState("");
-  console.log("props.imagePath :>> ", props.imagePath);
 
   React.useEffect(() => {
     const getImageLink = async () => {
       try {
         const imageURL = await partialItemPathToLink(props.imagePath);
-        console.log("imageURL :>> ", imageURL);
         setImageLink(imageURL);
       } catch (error) {
         console.log(error);

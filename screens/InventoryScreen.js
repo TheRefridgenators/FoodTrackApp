@@ -27,11 +27,12 @@ export default function InventoryScreen() {
         let imageLink = "";
 
         if (item.imagePath) {
+          console.log("item.imagePath :>> ", item.imagePath);
           imageLink = await partialItemPathToLink(item.imagePath);
         }
 
         tempItems.push({
-          name: item.label,
+          name: item.label === "null" ? "unknown item" : item.label,
           imageLink,
           useClass: item.useClass,
         });

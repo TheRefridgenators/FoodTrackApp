@@ -51,7 +51,6 @@ let count = 0;
 
 function docToAlert(alertDoc) {
   const alertData = alertDoc.data();
-  console.log("alertData :>> ", alertData);
 
   return (
     <TypedAlert
