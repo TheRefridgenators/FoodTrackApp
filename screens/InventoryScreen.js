@@ -58,7 +58,7 @@ export default function InventoryScreen() {
       </View>
     );
   } else {
-    return <ScrollView>{items.map(documentToInventoryItem)}</ScrollView>;
+    return <ScrollView>{itemComponents}</ScrollView>;
   }
 }
 

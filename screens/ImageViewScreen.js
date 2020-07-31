@@ -17,7 +17,7 @@ export function ImageViewScreen(props) {
         <Image source={{ uri: imageLink }} style={styles.imageStyle} />
       )}
       <View style={styles.displayDataContainer}>
-        <Text style={styles.timestampText}>Taken {metadata.timestamp}</Text>
+        <Text style={styles.timestampText}>Uploaded {metadata.timestamp}</Text>
       </View>
     </View>
   );
