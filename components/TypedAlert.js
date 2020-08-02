@@ -3,7 +3,7 @@ import { Image, Text, TouchableOpacity, StyleSheet, View } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
 import { useNavigation } from "@react-navigation/native";
 
-import { partialItemPathToLink } from "../utilities/Images";
+import { itemFilenameToLink } from "../utilities/Images";
 
 /**
  * An alert that serves to either notify the user of something or ask something
@@ -23,15 +23,18 @@ export function TypedAlert(props) {
   React.useEffect(() => {
     const getImageLink = async () => {
       try {
-        const imageURL = await partialItemPathToLink(props.imagePath);
+        const { label, confidence } = props.itemData;
+        const imageURL = await itemFilenameToLink(`${label}${confidence}.jpg`);
+
+        console.log("imageURL :>> ", imageURL);
         setImageLink(imageURL);
       } catch (error) {
         console.log(error);
       }
     };
 
-    if (props.imagePath) getImageLink();
-  }, [props.imagePath]);
+    getImageLink();
+  }, []);
 
   return (
     <TouchableOpacity

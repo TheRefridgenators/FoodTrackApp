@@ -35,7 +35,7 @@ export function SnapshotsScreen() {
           return [
             imageLink,
             {
-              timestamp: formatTimestamp(Moment(rawTimestamp.toDate())),
+              timestamp: rawTimestamp.toDate(),
             },
           ];
         })
@@ -45,7 +45,15 @@ export function SnapshotsScreen() {
         (snap1, snap2) => snap2[1].timestamp - snap1[1].timestamp
       ); // Sorted in descending date order
 
-      setSnapshots(sortedSnapshots);
+      const formattedTimestamps = sortedSnapshots.map((snapshot) => {
+        console.log("snapshot :>> ", snapshot);
+        return [
+          snapshot[0],
+          { timestamp: formatTimestamp(Moment(snapshot[1].timestamp)) },
+        ];
+      });
+
+      setSnapshots(formattedTimestamps);
     };
 
     if (currentUser) getSnapshots();

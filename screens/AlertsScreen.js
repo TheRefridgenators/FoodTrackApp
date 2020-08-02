@@ -56,7 +56,6 @@ function docToAlert(alertDoc) {
     <TypedAlert
       purpose={alertData.purpose}
       summary={alertData.summary}
-      imagePath={alertData.itemData?.imagePath}
       itemData={alertData.itemData}
       timestamp={formatTimestamp(Moment(alertData.timestamp.toDate()))}
       alertId={alertDoc.id}

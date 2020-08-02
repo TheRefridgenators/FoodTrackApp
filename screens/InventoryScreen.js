@@ -7,7 +7,7 @@ import "firebase/storage";
 
 import InventoryItem from "../components/InventoryItem";
 import { registerForNotificationsAsync } from "../utilities/Notifications";
-import { partialItemPathToLink } from "../utilities/Images";
+import { itemFilenameToLink } from "../utilities/Images";
 
 export default function InventoryScreen() {
   const currentUser = firebase.auth().currentUser;
@@ -24,17 +24,14 @@ export default function InventoryScreen() {
       const tempItems = [];
 
       for (const item of userDoc.data().items) {
-        let imageLink = "";
-
-        if (item.imagePath) {
-          console.log("item.imagePath :>> ", item.imagePath);
-          imageLink = await partialItemPathToLink(item.imagePath);
-        }
+        const filename = `${item.label}${item.confidence}.jpg`;
+        const imageLink = await itemFilenameToLink(filename);
+        console.log("imageLink :>> ", imageLink);
 
         tempItems.push({
           name: item.label === "null" ? "unknown item" : item.label,
           imageLink,
-          useClass: item.useClass,
+          useClass: item.usecase,
           itemData: item,
         });
       }
@@ -65,11 +62,23 @@ export default function InventoryScreen() {
 let count = 0;
 
 function documentToInventoryItem(document) {
+  let useClass = "";
+
+  switch (document.useClass) {
+    case "single":
+      useClass = "one";
+      break;
+
+    default:
+      useClass = document.useClass;
+      break;
+  }
+
   return (
     <InventoryItem
       itemName={document.name}
       imageLink={document.imageLink}
-      useClass={document.useClass === "single" ? "one" : "multiple"}
+      useClass={useClass}
       itemData={document.itemData}
       key={count++}
     />
