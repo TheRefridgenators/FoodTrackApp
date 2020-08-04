@@ -67,7 +67,7 @@ async function writeOverride(itemData, alertId, itemName, useClass) {
 
   const overrideData = {
     label: itemName,
-    useClass,
+    usecase: useClass,
     confidence: itemData.confidence,
     area: itemData.area,
   };

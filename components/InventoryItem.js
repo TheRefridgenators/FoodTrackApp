@@ -46,7 +46,7 @@ export default function InventoryItem(props) {
         const bestOverride = matchingOverrides[0];
 
         setItemName(bestOverride.get("label"));
-        setUseClass(bestOverride.get("useClass"));
+        setUseClass(bestOverride.get("usecase"));
       }
     };
 

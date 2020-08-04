@@ -63,13 +63,13 @@ let count = 0;
 function documentToInventoryItem(document) {
   let useClass = "";
 
-  switch (document.useClass) {
+  switch (document.usecase) {
     case "single":
       useClass = "one";
       break;
 
     default:
-      useClass = document.useClass;
+      useClass = document.usecase;
       break;
   }
 
