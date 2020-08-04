@@ -46,9 +46,9 @@ export async function registerForNotificationsAsync() {
 
       const pushTokens = userData.get("pushTokens");
 
-      let updatedPushTokens = pushTokens ?? [];
-      if (!updatedPushTokens.includes(devicePushToken)) {
-        updatedPushTokens = updatedPushTokens.concat(devicePushToken.data)
+      const updatedPushTokens = pushTokens ?? [];
+      if (!updatedPushTokens.includes(devicePushToken.data)) {
+        updatedPushTokens.push(devicePushToken.data);
       }
 
       await firebase.firestore().doc(`users/${currentUser.uid}`).update({
