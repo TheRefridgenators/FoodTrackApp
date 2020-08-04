@@ -42,11 +42,9 @@ export async function registerForNotificationsAsync() {
 
       const devicePushToken = await Notifications.getExpoPushTokenAsync();
 
-      const {
-        data: {
-          pushTokens
-        }
-      } = await firebase.firestore().doc(`users/${currentUser.uid}`).get();
+      const userData = await firebase.firestore().doc(`users/${currentUser.uid}`).get();
+
+      const pushTokens = userData.get("pushTokens");
 
       let updatedPushTokens = pushTokens ?? [];
       if (!updatedPushTokens.includes(devicePushToken)) {
