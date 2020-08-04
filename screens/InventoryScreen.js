@@ -26,7 +26,6 @@ export default function InventoryScreen() {
       for (const item of userDoc.data().items) {
         const filename = `${item.label}${item.confidence}.jpg`;
         const imageLink = await itemFilenameToLink(filename);
-        console.log("imageLink :>> ", imageLink);
 
         tempItems.push({
           name: item.label === "null" ? "unknown item" : item.label,

@@ -46,7 +46,6 @@ export function SnapshotsScreen() {
       ); // Sorted in descending date order
 
       const formattedTimestamps = sortedSnapshots.map((snapshot) => {
-        console.log("snapshot :>> ", snapshot);
         return [
           snapshot[0],
           { timestamp: formatTimestamp(Moment(snapshot[1].timestamp)) },

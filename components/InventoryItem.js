@@ -53,8 +53,6 @@ export default function InventoryItem(props) {
     applyOverrides();
   }, [props.itemName, props.useClass]);
 
-  console.log("props.imageLink :>> ", props.imageLink);
-
   return (
     <TouchableOpacity
       style={styles.contentContainer}

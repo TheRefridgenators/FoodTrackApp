@@ -13,15 +13,20 @@ import { firebaseLoginConfig } from "../config";
 export function LoginScreen(props) {
   return (
     <View style={styles.screenContainer}>
-      <TouchableOpacity
-        style={styles.googleButton}
-        onPress={() => logInUser(props.onLogin)}
-      >
-        <Text style={{ color: "white", marginHorizontal: 5 }}>
-          Log In with Google
-        </Text>
-        <Ionicons name="logo-google" size={30} color="white" />
-      </TouchableOpacity>
+      <View style={styles.topTextContainer}>
+        <Text style={{ fontSize: 30 }}>Login to FoodTrack</Text>
+      </View>
+      <View style={styles.serviceButtonContainer}>
+        <TouchableOpacity
+          style={styles.googleButton}
+          onPress={() => logInUser(props.onLogin)}
+        >
+          <Text style={{ color: "white", marginHorizontal: 5 }}>
+            With Google
+          </Text>
+          <Ionicons name="logo-google" size={30} color="white" />
+        </TouchableOpacity>
+      </View>
     </View>
   );
 }
@@ -66,6 +71,18 @@ async function logInUser(onLogin) {
 const styles = StyleSheet.create({
   screenContainer: {
     flex: 1,
+    flexDirection: "column",
+    justifyContent: "center",
+    alignItems: "center",
+  },
+  topTextContainer: {
+    flex: 1,
+    flexDirection: "column",
+    alignItems: "center",
+    justifyContent: "center",
+  },
+  serviceButtonContainer: {
+    flex: 4,
     flexDirection: "column",
     justifyContent: "center",
     alignItems: "center",

@@ -25,8 +25,6 @@ export function TypedAlert(props) {
       try {
         const { label, confidence } = props.itemData;
         const imageURL = await itemFilenameToLink(`${label}${confidence}.jpg`);
-
-        console.log("imageURL :>> ", imageURL);
         setImageLink(imageURL);
       } catch (error) {
         console.log(error);
