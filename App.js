@@ -2,6 +2,7 @@ import * as React from "react";
 import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
 import { Platform, StatusBar, StyleSheet, View } from "react-native";
+import * as Notifications from "expo-notifications";
 
 // Firebase for data storage/authentication
 import * as firebase from "firebase/app";
@@ -20,6 +21,14 @@ const Stack = createStackNavigator();
 if (!firebase.apps.length) {
   firebase.initializeApp(firebaseConfig);
 }
+
+Notifications.setNotificationHandler({
+  handleNotification: async () => ({
+    shouldShowAlert: true,
+    shouldPlaySound: false,
+    shouldSetBadge: true,
+  }),
+});
 
 // Add user to firestore if they're not there already, otherwise update
 
